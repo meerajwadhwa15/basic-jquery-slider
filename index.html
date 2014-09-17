@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Crousel</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<style type="text/css">
+		/* Crousel Basic CSS */
+		.main-slider-container { position: relative; margin: 0 auto }
+
+		.slider-container {  position: absolute; overflow: hidden; border: 1px solid #000; }
+		ul { position: relative; margin: 0; padding: 0;  }
+		li { list-style-type: none; position: relative; float: left; }
+
+		.disable-link { pointer-events: none; }
+
+		.prev {  left: -60px; background: url(images/prev.png); }
+		.next {  right: -60px; background: url(images/next.png); }
+		.disable-link.prev { background: none; }
+		.disable-link.next { background: none; }
+		.crousel-navigation { position: absolute; top: 110px; width: 50px; height: 50px; }
+
+		/*  Some other style to butify content */
+		.slider-container h3, .slider-container p { margin-left: 20px; margin-right: 20px; }
+		.slider-container p { width: 200px; display: inline-block; vertical-align: top; }
+		.slider-container .crousel-image-outer { margin-right: 20px; display: inline-block; width: 200px; }
+	</style>
+
+	<!-- Libs Files -->
+	<script src="libs/jquery-1.10.2.min.js"></script>
+	<script src="libs/slider.js"></script>
+
+
+
+</head>
+
+
+<body>
+<div id="container">
+	  <div class="main-slider-container">
+	  <div class="prev crousel-navigation"></div>
+	  <div class="next crousel-navigation"></div>
+
+	  <div class="slider-container">
+	  		<ul>
+	  					<li>
+	  				<h3>Title 1</h3>
+	  				
+	  				<p>Some text description. Some text description. Some text description. Some text description. Some text description. Some text description.</p>
+	  				
+	  				<div class="crousel-image-outer">
+	  					<img src="images/1.png" alt="1" width="200" height="200" />	
+		  			</div
+	  			</li>	
+
+	<li>
+	  				<h3>Title 2</h3>
+	  				
+	  				<p>Some text description. Some text description. Some text description. Some text description. Some text description. Some text description.</p>
+	  				
+	  				<div class="crousel-image-outer">
+	  					<img src="images/2.png" alt="1" width="200" height="200" />	
+		  			</div
+	  			</li>	
+
+	  				<li>
+	  				<h3>Title 3</h3>
+	  				
+	  				<p>Some text description. Some text description. Some text description. Some text description. Some text description. Some text description.</p>
+	  				
+	  				<div class="crousel-image-outer">
+	  					<img src="images/3.png" alt="1" width="200" height="200" />	
+		  			</div
+	  			</li>	
+	  			
+
+	  			<li>
+	  				<h3>Title 4</h3>
+	  				
+	  				<p>Some text description. Some text description. Some text description. Some text description. Some text description. Some text description.</p>
+	  				
+	  				<div class="crousel-image-outer">
+	  					<img src="images/4.png" alt="1" width="200" height="200" />	
+		  			</div
+	  			</li>	
+
+
+	  		</ul>
+	  </div>
+	  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".main-slider-container").slider();
+	});
+	</script>
+
+
+</html>
