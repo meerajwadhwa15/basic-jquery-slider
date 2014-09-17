@@ -1,3 +1,8 @@
+/*
+    Simple jQuery Carousel
+    Author: Meeraj Wadhwa
+*/
+
 $.fn.slider = function(opt) {
 
     // current slider tab default to first
@@ -11,21 +16,34 @@ $.fn.slider = function(opt) {
         currentTab : 1
     },
 
-
-
+    // selectors use by plugin
     selector = {
         ul: ".slider-container ul",
         prev: ".prev",
         next: ".next",
         container: ".slider-container",
-        mainContainer: ".main-slider-container",
+        mainContainer: $(this),
         li: ".slider-container ul li"
     },
 
+    // bind click events
     bindEvents = function() {
-    	$(selector.prev).click(function() { _this.moveBack() });
-        $(selector.next).click(function() { _this.moveForward() });
+    	selector.mainContainer.find(selector.prev).click(function() { _this.moveBack() });
+        selector.mainContainer.find(selector.next).click(function() { _this.moveForward() });
     },
+
+    // add classes to elements
+    addClassToElements = function(sel, cls) {
+        for(var i in sel)
+            selector.mainContainer.find(sel[i]).addClass(cls);
+    },
+
+    // remove classes from element
+    removeClassToElements = function(sel, cls) {
+        for(var i in sel)
+            selector.mainContainer.find(sel[i]).removeClass(cls);
+    },
+
 
     init = function() {
     	// set crousel layout
@@ -33,47 +51,45 @@ $.fn.slider = function(opt) {
         bindEvents();
     };
 
+    // merging the objects
     $.extend(options, opt);
 
+    // setting carousel on DOM
     this.setCrousel = function() {
     	// disable prev link
-    	$(selector.prev).addClass("disable-link");	
-    	$(selector.ul).css({width: (options.crouselLength * options.crouselWidth) + "px"});
-    	$(selector.container +"," + selector.mainContainer +"," + selector.li ).css({width: options.crouselWidth + "px"});
+    	addClassToElements([selector.prev], "disable-link");
+    	selector.mainContainer.find(selector.ul).css({width: (options.crouselLength * options.crouselWidth) + "px"});
+    	selector.mainContainer.css({width: options.crouselWidth + "px"}).find(selector.container +"," + selector.li ).css({width: options.crouselWidth + "px"});
     },
 
     // move back
     this.moveBack = function() {
     	if(options.currentTab > 1) {
-	    	$(selector.prev).removeClass("disable-link");	
-	    	$(selector.next).removeClass("disable-link");	
+	    	removeClassToElements([selector.next, selector.prev], "disable-link");
     		options.currentTab--;
     		_this.moveCrousel();
     	} 
 
-    	if(options.currentTab == 1) {
-    		$(selector.prev).addClass("disable-link");
-    	}
+    	if(options.currentTab == 1) addClassToElements([selector.prev], "disable-link");
     },
 
     // move forward
     this.moveForward = function() {
     	if(options.currentTab < options.crouselLength) {	
-    		$(selector.prev).removeClass("disable-link");	
-	    	$(selector.next).removeClass("disable-link");	
+            removeClassToElements([selector.next, selector.prev], "disable-link");
     		options.currentTab++;
     		_this.moveCrousel();
     	} 
 
-    	if(options.currentTab == options.crouselLength) {
-    		$(selector.next).addClass("disable-link");
-    	}
+    	if(options.currentTab == options.crouselLength) addClassToElements([selector.next], "disable-link");
     },
 
     // move crousel
     this.moveCrousel = function() {
-		$(selector.ul).animate({ 'left': -((options.currentTab - 1)*500)+'px' }, 1000, function() {});
+		selector.mainContainer.find(selector.ul).animate({ 'left': -((options.currentTab - 1)*options.crouselWidth)+'px' }, 800, function() {});
     };
 
+    // calling the init function on the fly
     init();
 };
+
