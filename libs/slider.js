@@ -10,12 +10,12 @@ $.fn.slider = function(opt) {
 
     options = {
         // crousel length
-        crouselLength: 4,
+        crouselLength: null,
         // crousel per element width
-        crouselWidth: 500,
+        crouselWidth: null,
         currentTab : 1
     },
-
+    
     // selectors use by plugin
     selector = {
         ul: ".slider-container ul",
@@ -24,26 +24,30 @@ $.fn.slider = function(opt) {
         container: ".slider-container",
         mainContainer: $(this),
         li: ".slider-container ul li"
-    },
+    };
+
+    // merging the objects
+    $.extend(options, opt);
 
     // bind click events
-    bindEvents = function() {
+    var bindEvents = function() {
     	selector.mainContainer.find(selector.prev).click(function() { _this.moveBack() });
         selector.mainContainer.find(selector.next).click(function() { _this.moveForward() });
     },
 
     // add classes to elements
     addClassToElements = function(sel, cls) {
-        for(var i in sel)
+        for(var i in sel) {
             selector.mainContainer.find(sel[i]).addClass(cls);
+        }
     },
 
     // remove classes from element
     removeClassToElements = function(sel, cls) {
-        for(var i in sel)
+        for(var i in sel) {
             selector.mainContainer.find(sel[i]).removeClass(cls);
+        }
     },
-
 
     init = function() {
     	// set crousel layout
@@ -51,14 +55,18 @@ $.fn.slider = function(opt) {
         bindEvents();
     };
 
-    // merging the objects
-    $.extend(options, opt);
-
     // setting carousel on DOM
     this.setCrousel = function() {
+        var parentUl;
+
     	// disable prev link
     	addClassToElements([selector.prev], "disable-link");
-    	selector.mainContainer.find(selector.ul).css({width: (options.crouselLength * options.crouselWidth) + "px"});
+        parentUl = selector.mainContainer.find(selector.ul);
+
+    	options.crouselLength = parentUl.find('li').length;
+        options.crouselWidth = selector.mainContainer.find(selector.container).width();
+
+        parentUl.css({width: (options.crouselLength * options.crouselWidth) + "px"});
     	selector.mainContainer.css({width: options.crouselWidth + "px"}).find(selector.container +"," + selector.li ).css({width: options.crouselWidth + "px"});
     },
 
