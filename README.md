@@ -1,4 +1,4 @@
-jquery-crousel
+jquery-slider
 ==============
 
-Very light weight jquery crousel plugin
+Very light weight jquery slider plugin
