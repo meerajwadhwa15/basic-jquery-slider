@@ -3,7 +3,7 @@
     Author: Meeraj Wadhwa
 */
 
-$.fn.slider = function(opt) {
+$.fn.basicSlider = function(opt) {
 
     // current slider tab default to first
     var _this = this,
