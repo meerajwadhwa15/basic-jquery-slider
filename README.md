@@ -1,4 +1,4 @@
 jquery-slider
 ==============
 
-Very light weight jquery slider plugin
+A simple jQuery slider plug-in. Very basic, simple to use and modify.
